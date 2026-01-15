@@ -1,0 +1,1199 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XX电子烟- 年终盛典抽奖</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入高奢字体 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap">
+    
+    <!-- 自定义配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#FFE2A6',
+                            DEFAULT: '#E6C35A',
+                            dark: '#C79A2B'
+                        },
+                        ebony: {
+                            light: '#222222',
+                            DEFAULT: '#111111',
+                            dark: '#000000'
+                        }
+                    },
+                    fontFamily: {
+                        luxury: ['Cinzel', 'Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义样式 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            body {
+                color: #f4eee3;
+                letter-spacing: 0.02em;
+            }
+            .text-shadow-gold {
+                text-shadow: 0 0 8px rgba(255, 214, 128, 0.55), 0 0 18px rgba(211, 169, 77, 0.5);
+            }
+            .bg-gradient-gold {
+                background: linear-gradient(135deg, #8a6b1a, #caa357, #ffe2a6);
+            }
+            .border-gold-glow {
+                box-shadow: 0 0 8px rgba(255, 214, 128, 0.45), 0 0 16px rgba(202, 163, 87, 0.35);
+            }
+            .rotate-prize {
+                animation: rotatePrize 0.5s ease-in-out;
+            }
+            .countdown-pulse {
+                animation: pulse 1s infinite alternate;
+            }
+            .fade-in {
+                animation: fadeIn 0.5s ease-in;
+            }
+            .marquee {
+                animation: marquee 20s linear infinite;
+            }
+            .lux-bg {
+                position: relative;
+                background:
+                    url('assets/dubai-gold-bg.png') center top / cover no-repeat,
+                    radial-gradient(1200px 600px at 18% 12%, rgba(255, 214, 128, 0.32), transparent 55%),
+                    radial-gradient(900px 540px at 82% 18%, rgba(202, 163, 87, 0.3), transparent 58%),
+                    radial-gradient(700px 500px at 50% 85%, rgba(119, 92, 28, 0.25), transparent 60%),
+                    linear-gradient(135deg, #020202 0%, #0a0a0a 45%, #060606 100%);
+            }
+            .lux-bg::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(circle at 22% 30%, rgba(255, 214, 128, 0.28), transparent 45%),
+                    radial-gradient(circle at 78% 68%, rgba(202, 163, 87, 0.3), transparent 48%);
+                opacity: 0.9;
+                pointer-events: none;
+            }
+        .lux-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(1000px 600px at 50% 0%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.78)),
+                radial-gradient(600px 400px at 50% 50%, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.6));
+            pointer-events: none;
+        }
+        .lux-bg::before,
+        .lux-bg::after {
+            mix-blend-mode: screen;
+        }
+        body.is-drawing .lux-bg {
+            background:
+                url('assets/draw-bg.jpg') center center / cover no-repeat,
+                #0f1115;
+        }
+            .avatar-pool {
+                position: relative;
+                border-radius: 2.5rem;
+                background: linear-gradient(160deg, #0b0b0b 0%, #141414 55%, #090909 100%);
+                border: 1px solid rgba(202, 163, 87, 0.6);
+                box-shadow: inset 0 0 0 2px rgba(202, 163, 87, 0.25), 0 24px 70px rgba(0, 0, 0, 0.6), 0 0 40px rgba(202, 163, 87, 0.2);
+                overflow: hidden;
+            }
+            .avatar-pool::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background:
+                    linear-gradient(120deg, rgba(255, 214, 128, 0.12), transparent 45%),
+                    radial-gradient(circle at 50% 15%, rgba(255, 214, 128, 0.18), transparent 55%);
+                pointer-events: none;
+            }
+            .avatar-pool::after {
+                content: '';
+                position: absolute;
+                top: -26px;
+                left: 50%;
+                width: 92px;
+                height: 38px;
+                transform: translateX(-50%);
+                background: linear-gradient(180deg, #2a2a2a 0%, #121212 100%);
+                border-radius: 0 0 18px 18px;
+                border: 1px solid rgba(202, 163, 87, 0.55);
+                box-shadow: 0 12px 22px rgba(0, 0, 0, 0.55);
+                pointer-events: none;
+            }
+            #avatar-grid.avatar-grid-orbit {
+                position: relative;
+                display: block;
+                width: 95vh;
+                height: 95vh;
+                margin: 0 auto;
+                perspective: 900px;
+                transform-style: preserve-3d;
+            }
+            .sphere-overlay {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                width: 95vh;
+                height: 95vh;
+                transform: translate(-50%, -50%);
+                perspective: 900px;
+                transform-style: preserve-3d;
+                z-index: 30;
+                pointer-events: none;
+                animation: sphereFadeIn 0.6s ease-out;
+            }
+            .sphere-overlay.is-exiting {
+                animation: sphereFadeOut 0.4s ease-in;
+            }
+            .sphere-overlay.is-spinning .avatar-sphere {
+                animation: sphereSpin 1s linear infinite;
+            }
+            #avatar-grid.avatar-grid-orbit.is-spinning {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 30;
+                animation: sphereFadeIn 0.6s ease-out;
+            }
+            .avatar-sphere {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: min(80vh,80vw);
+                height: min(80vh,80vw);
+                transform: translate(-50%, -50%);
+                transform-origin: center;
+                transform-style: preserve-3d;
+            }
+            #avatar-grid.avatar-grid-orbit.is-spinning .avatar-sphere {
+                animation: sphereSpin 1s linear infinite;
+            }
+            .avatar-cell {
+                position: relative;
+                border-radius: 9999px;
+                border: 2px solid rgba(202, 163, 87, 0.45);
+                background: rgba(10, 10, 10, 0.92);
+                transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+                overflow: visible;
+            }
+            .avatar-cell.is-orbit {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotateY(var(--ry)) rotateX(var(--rx)) translateZ(var(--radius));
+                will-change: transform;
+            }
+            .avatar-cell.is-orbit img {
+                animation: none;
+            }
+            .avatar-cell::after {
+                content: '';
+                position: absolute;
+                inset: -6px;
+                border-radius: 9999px;
+                box-shadow: 0 0 18px rgba(255, 214, 128, 0.5), 0 0 32px rgba(202, 163, 87, 0.4);
+                opacity: 0;
+                transition: opacity 0.2s ease;
+                pointer-events: none;
+            }
+            .avatar-cell.is-active {
+                border-color: rgba(255, 214, 128, 0.85);
+                box-shadow: 0 0 18px rgba(255, 214, 128, 0.4);
+            }
+            .avatar-cell.is-active::after {
+                opacity: 1;
+            }
+            .avatar-cell.is-winner {
+                border-color: rgba(255, 214, 128, 1);
+                box-shadow: 0 0 28px rgba(255, 214, 128, 0.65), 0 0 44px rgba(202, 163, 87, 0.55);
+            }
+            .avatar-cell.has-won {
+                opacity: 0.45;
+            }
+            .avatar-name {
+                position: absolute;
+                left: 50%;
+                bottom: -0.4rem;
+                transform: translate(-50%, 100%);
+                font-size: 0.65rem;
+                color: rgba(255, 214, 128, 0.9);
+                white-space: nowrap;
+            }
+            .avatar-fallback {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: rgba(255, 214, 128, 0.95);
+                background: radial-gradient(circle at 30% 20%, rgba(255, 214, 128, 0.25), rgba(10, 10, 10, 0.95));
+                border-radius: 9999px;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+            .avatar-cell.is-fallback .avatar-fallback {
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotatePrize {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        @keyframes floatAvatar {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.02); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        
+        @keyframes sphereSpin {
+            from { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg); }
+            to { transform: translate(-50%, -50%) rotateX(0deg) rotateY(360deg); }
+        }
+
+        @keyframes sphereFadeIn {
+            from { opacity: 0; transform: translate(-50%, -45%) scale(0.98); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes sphereFadeOut {
+            from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            to { opacity: 0; transform: translate(-50%, -45%) scale(0.98); }
+        }
+
+        #avatar-grid.avatar-grid-orbit.is-exiting {
+            animation: sphereFadeOut 0.4s ease-in;
+        }
+        
+        /* 3D轮播容器样式 */
+        .prize-carousel {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .prize-item {
+            backface-visibility: hidden;
+            transition: transform 0.5s ease;
+        }
+
+            .winner-overlay {
+                position: fixed;
+                inset: 0;
+                display: flex;
+                align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.9));
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+            z-index: 50;
+        }
+
+        .winner-overlay.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .winner-overlay .winner-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .winner-overlay .winner-avatar {
+            width: min(60vw, 320px);
+            height: min(60vw, 320px);
+            border-radius: 9999px;
+            border: 4px solid rgba(255, 214, 128, 0.95);
+            box-shadow: 0 0 48px rgba(255, 214, 128, 0.65), 0 0 90px rgba(202, 163, 87, 0.55);
+            object-fit: cover;
+        }
+
+        .winner-overlay .winner-name {
+            font-size: 1.25rem;
+            color: rgba(255, 214, 128, 0.98);
+            font-weight: 600;
+        }
+        .winner-overlay .winner-prize {
+            font-size: 1.25rem;
+            color: rgba(255, 214, 128, 0.98);
+            font-weight: 600;
+        }
+        .petal-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 60;
+        }
+        .petal {
+            position: absolute;
+            top: -10vh;
+            width: 10px;
+            height: 14px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 240, 205, 0.98), rgba(255, 204, 102, 0.9));
+            border-radius: 60% 40% 60% 40%;
+            opacity: 0.85;
+            animation: petalFall var(--duration) linear forwards, petalDrift 2.2s ease-in-out infinite;
+            filter: blur(0.2px);
+        }
+        @keyframes petalFall {
+            from { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+            to { transform: translate3d(0, 110vh, 0) rotate(360deg); }
+        }
+        @keyframes petalDrift {
+            0% { margin-left: -10px; }
+            50% { margin-left: 10px; }
+            100% { margin-left: -10px; }
+        }
+
+        .name-cloud {
+            position: fixed;
+            inset: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 40;
+            overflow: hidden;
+            perspective: 900px;
+            transform-style: preserve-3d;
+            animation: cloudSpin 3.5s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .name-cloud.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+            animation-play-state: running;
+        }
+
+        .name-cloud .name-item {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            color: rgba(255, 214, 128, 0.95);
+            font-weight: 600;
+            text-shadow: 0 0 6px rgba(255, 214, 128, 0.45);
+            animation: nameDrift 3.6s ease-in-out infinite;
+            white-space: nowrap;
+            transform: translate(-50%, -50%) rotateY(var(--ry)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) scale(var(--s));
+        }
+
+        .name-cloud .name-item.dim {
+            opacity: 0.55;
+        }
+
+        @keyframes nameDrift {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes cloudSpin {
+            0% { transform: rotateX(12deg) rotateY(0deg); }
+            100% { transform: rotateX(12deg) rotateY(360deg); }
+        }
+        
+        /* 滚动条样式 */
+        .scrollbar-custom::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background: theme('colors.ebony.light');
+            border-radius: 3px;
+        }
+        
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: theme('colors.gold.DEFAULT');
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="lux-bg min-h-screen font-luxury text-white overflow-x-hidden">
+        <!-- 页面头部 -->
+    <header class="relative py-8 px-4 md:px-8 bg-ebony border-b border-gold/30">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <!-- Logo区域 -->
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="w-16 h-16 bg-gradient-gold rounded-full flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-smoking text-ebony-dark text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gold text-shadow-gold">
+                        大利万维 · 年终盛典
+                    </h1>
+                    <p class="text-gold/80 text-sm md:text-base">感恩同行 · 幸运抽奖</p>
+                </div>
+            </div>
+            
+        </div>
+    </header>
+
+
+        <main class="container mx-auto px-4 py-12">
+        <!-- 抽奖倒计时 -->
+        <section class="mb-16 text-center">
+            <h2 class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-6 text-gold text-shadow-gold">
+                抽奖倒计时
+            </h2>
+            <div class="flex justify-center gap-4 md:gap-6 lg:gap-8 flex-wrap">
+                <div id="days" class="countdown-pulse w-20 md:w-24 h-20 md:h-24 bg-ebony-light border-2 border-gold rounded-lg flex flex-col items-center justify-center border-gold-glow">
+                    <span class="text-2xl md:text-3xl font-bold text-gold">00</span>
+                    <span class="text-xs md:text-sm text-gold/80">天</span>
+                </div>
+                <div id="hours" class="countdown-pulse w-20 md:w-24 h-20 md:h-24 bg-ebony-light border-2 border-gold rounded-lg flex flex-col items-center justify-center border-gold-glow">
+                    <span class="text-2xl md:text-3xl font-bold text-gold">00</span>
+                    <span class="text-xs md:text-sm text-gold/80">时</span>
+                </div>
+                <div id="minutes" class="countdown-pulse w-20 md:w-24 h-20 md:h-24 bg-ebony-light border-2 border-gold rounded-lg flex flex-col items-center justify-center border-gold-glow">
+                    <span class="text-2xl md:text-3xl font-bold text-gold">00</span>
+                    <span class="text-xs md:text-sm text-gold/80">分</span>
+                </div>
+                <div id="seconds" class="countdown-pulse w-20 md:w-24 h-20 md:h-24 bg-ebony-light border-2 border-gold rounded-lg flex flex-col items-center justify-center border-gold-glow">
+                    <span class="text-2xl md:text-3xl font-bold text-gold">00</span>
+                    <span class="text-xs md:text-sm text-gold/80">秒</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 抽奖展示区域 -->
+        <section class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-8 text-center text-gold text-shadow-gold">
+                    头像池 · 惊喜大奖
+                </h2>
+                
+                <!-- 头像池抽奖容器 -->
+                <div class="mb-8">
+                    <div id="avatar-pool" class="avatar-pool p-6 md:p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="text-gold font-semibold tracking-wide">头像池</div>
+                            <div class="text-xs text-gold/70"></div>
+                        </div>
+                        <div id="avatar-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 md:gap-4 relative w-full z-10">
+                            <div id="avatar-sphere" class="avatar-sphere"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 抽奖按钮 -->
+                <div class="text-center">
+                    <button id="draw-btn" class="bg-gradient-gold text-ebony-dark font-bold py-3 px-10 rounded-full text-lg hover:scale-105 transition-all duration-300 border-gold-glow">
+                        <i class="fa-solid fa-gift mr-2"></i> 立即抽奖
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- 中奖名单区域 -->
+        <section class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 实时中奖名单 -->
+                <div class="bg-ebony-light border border-gold/50 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gold">
+                            <i class="fa-solid fa-trophy mr-2"></i> 实时中奖名单
+                        </h2>
+                        <span id="total-winners" class="bg-gold/20 text-gold px-3 py-1 rounded-full text-sm">共0 人</span>
+                    </div>
+                    
+                    <div class="overflow-y-auto max-h-96 scrollbar-custom">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gold/30">
+                                    <th class="text-left py-3 text-gold">序号</th>
+                                    <th class="text-left py-3 text-gold">中奖人</th>
+                                    <th class="text-left py-3 text-gold">奖品</th>
+                                    <th class="text-left py-3 text-gold">时间</th>
+                                </tr>
+                            </thead>
+                            <tbody id="winners-list">
+                                <!-- 中奖记录将动态插入到这里 -->
+                                <tr>
+                                    <td colspan="4" class="text-center py-8 text-gray-500">暂无中奖记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-4 text-sm text-gray-400">
+                        <i class="fa-solid fa-info-circle mr-2"></i>
+                        每10分钟自动更新中奖名单，最多显示50条记录
+                    </div>
+                </div>
+                
+                <!-- 参与抽奖人员名单 -->
+                <div class="bg-ebony-light border border-gold/50 rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gold">
+                            <i class="fa-solid fa-users mr-2"></i> 参与抽奖人员
+                        </h2>
+                        <span id="total-participants" class="bg-gold/20 text-gold px-3 py-1 rounded-full text-sm">共0 人</span>
+                    </div>
+                    
+                    <div class="overflow-y-auto max-h-80 scrollbar-custom">
+                        <div id="participants-list" class="space-y-2">
+                            <!-- 参与人员将动态插入到这里 -->
+                            <div class="text-center py-8 text-gray-500">暂无参与人员</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gold/80 text-sm">实时抽奖动态</span>
+                        </div>
+                        <div class="bg-ebony mt-2 p-3 rounded-lg overflow-hidden">
+                            <div id="marquee-container" class="whitespace-nowrap">
+                                <span id="marquee-text" class="text-gold/90">欢迎参与大利万维年终抽奖盛典！</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 奖品列表区域 -->
+        <section class="mb-16">
+            <h2 class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-8 text-center text-gold text-shadow-gold">
+                奖品一览
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- 奖品1 -->
+                <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105" data-prize-id="1">
+                    <img src="https://picsum.photos/seed/vapor1/400/200" alt="一等奖 - 旗舰款电子烟套装" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gold">一等奖 · 旗舰款电子烟套装</h3>
+                        <p class="text-gray-300 mt-2">包含旗舰主机*1 + 雾化弹*6 + 定制收纳盒</p>
+                        <div class="mt-2 flex items-center justify-between">
+                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-1">3</span> 个</span>
+                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-1">0</span> 人</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 奖品2 -->
+                <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105" data-prize-id="2">
+                    <img src="https://picsum.photos/seed/vapor2/400/200" alt="二等奖 - 高端雾化弹礼盒" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gold">二等奖 · 高端雾化弹礼盒</h3>
+                        <p class="text-gray-300 mt-2">限量版雾化弹*12 + 定制烟灰缸</p>
+                        <div class="mt-2 flex items-center justify-between">
+                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-2">5</span> 个</span>
+                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-2">0</span> 人</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 奖品3 -->
+                <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105" data-prize-id="3">
+                    <img src="https://picsum.photos/seed/vapor3/400/200" alt="三等奖 - 定制电子烟配件包" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gold">三等奖 · 定制电子烟配件包</h3>
+                        <p class="text-gray-300 mt-2">充电底座*1 + 清洁套装*1 + 挂绳*1</p>
+                        <div class="mt-2 flex items-center justify-between">
+                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-3">10</span> 个</span>
+                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-3">0</span> 人</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 奖品4 -->
+                <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105" data-prize-id="4">
+                    <img src="https://picsum.photos/seed/vapor4/400/200" alt="四等奖 - 体验装雾化弹" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gold">四等奖 · 体验装雾化弹</h3>
+                        <p class="text-gray-300 mt-2">多种口味雾化弹*3</p>
+                        <div class="mt-2 flex items-center justify-between">
+                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-4">20</span> 个</span>
+                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-4">0</span> 人</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 奖品5 -->
+                <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105 sm:col-span-2 sm:justify-self-center sm:max-w-md lg:col-span-1 lg:max-w-none" data-prize-id="5">
+                    <img src="https://picsum.photos/seed/vapor5/400/200" alt="五等奖 - 品牌周边礼盒" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gold">五等奖 · 品牌周边礼盒</h3>
+                        <p class="text-gray-300 mt-2">品牌T恤*1 + 保温杯*1</p>
+                        <div class="mt-2 flex items-center justify-between">
+                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-5">30</span> 个</span>
+                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-5">0</span> 人</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+
+    <!-- 页脚 -->
+    <footer class="bg-ebony border-t border-gold/30 py-8 px-4">
+        <div class="container mx-auto text-center">
+            <p class="text-gold/80 mb-4">(C) 2025 深圳大利万维科技有限公司 版权所有</p>
+            <div class="flex justify-center gap-4 mb-6">
+                <a href="#" class="text-gold/80 hover:text-gold transition-colors"><i class="fa-brands fa-weixin text-xl"></i></a>
+                <a href="#" class="text-gold/80 hover:text-gold transition-colors"><i class="fa-brands fa-weibo text-xl"></i></a>
+                <a href="#" class="text-gold/80 hover:text-gold transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript逻辑 -->
+    <script>
+        const prizes = [
+            {
+                id: 1,
+                name: "一等奖 - 旗舰款电子烟套装",
+                img: "https://picsum.photos/seed/prize1/200/200",
+                stock: 3,
+                claimed: 0
+            },
+            {
+                id: 2,
+                name: "二等奖 - 高端雾化弹礼盒",
+                img: "https://picsum.photos/seed/prize2/200/200",
+                stock: 5,
+                claimed: 0
+            },
+            {
+                id: 3,
+                name: "三等奖 - 定制电子烟配件包",
+                img: "https://picsum.photos/seed/prize3/200/200",
+                stock: 10,
+                claimed: 0
+            },
+            {
+                id: 4,
+                name: "四等奖 - 体验装雾化弹",
+                img: "https://picsum.photos/seed/prize4/200/200",
+                stock: 20,
+                claimed: 0
+            },
+            {
+                id: 5,
+                name: "五等奖 - 品牌周边礼盒",
+                img: "https://picsum.photos/seed/prize5/200/200",
+                stock: 30,
+                claimed: 0
+            }
+        ];
+
+        const baseNames = [
+            "张三", "李四", "王五", "赵六", "钱七", "孙八", "周九", "吴十", "郑十一", "王十二",
+            "刘十三", "陈十四", "杨十五", "黄十六", "林十七", "周十八", "吴十九", "郑二十", "徐一", "冯二",
+            "褚三", "卫四", "蒋五", "沈六", "韩七", "杨八", "朱九", "秦十", "尤十一", "许十二",
+            "何十三", "吕十四", "施十五", "张十六", "孔十七", "曹十八"
+        ];
+
+        function formatDateTime(date) {
+            const pad = (n) => n.toString().padStart(2, '0');
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+        }
+
+        let participants = Array.from({ length: 130 }, (_, i) => {
+            const name = baseNames[i] || `参与者${String(i + 1).padStart(3, '0')}`;
+            const joinedAt = new Date(2025, 0, 15, 10, 0, 0);
+            joinedAt.setMinutes(joinedAt.getMinutes() + i * 3);
+            return {
+                id: i + 1,
+                name,
+                joinedAt: formatDateTime(joinedAt),
+                hasWon: false
+            };
+        });
+
+        let winners = [];
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function getAvatarUrl(participant) {
+            const seed = (participant.id % 70) + 1;
+            return `https://i.pravatar.cc/120?img=${seed}`;
+        }
+
+        function getAvatarInitial(participant) {
+            if (!participant || !participant.name) return '';
+            return participant.name.slice(-1);
+        }
+
+        function getSpherePosition(index, total) {
+            if (total <= 1) {
+                return { rx: 0, ry: 0 };
+            }
+            const offset = 2 / total;
+            const increment = Math.PI * (3 - Math.sqrt(5));
+            const y = ((index * offset) - 1) + (offset / 2);
+            const r = Math.sqrt(1 - y * y);
+            const phi = index * increment;
+            const x = Math.cos(phi) * r;
+            const z = Math.sin(phi) * r;
+            const ry = Math.atan2(x, z) * (180 / Math.PI);
+            const rx = -Math.asin(y) * (180 / Math.PI);
+            return { rx, ry };
+        }
+
+        function getOrbitStyle(avatarGrid) {
+            const rect = avatarGrid.getBoundingClientRect();
+            const minDim = Math.min(rect.width || 0, rect.height || 0);
+            const avatarSize = minDim < 320 ? 44 : 56;
+            const maxRadius = Math.max(110, (minDim / 2) - (avatarSize / 2));
+            const minRadius = Math.max(90, maxRadius * 0.9);
+            const radius = minRadius + Math.random() * (maxRadius - minRadius);
+            const angle = Math.random() * 360;
+            const duration = 0.8 + Math.random() * 0.4;
+            return {
+                radius: `${radius.toFixed(1)}px`,
+                angle: `${angle.toFixed(1)}deg`,
+                duration: `${duration.toFixed(1)}s`
+            };
+        }
+
+        function renderAvatarPool() {
+            const avatarGrid = document.getElementById('avatar-grid');
+            if (!avatarGrid) return;
+            const shuffled = shuffleArray([...participants]).slice(0, 48);
+            const gridClasses = ['grid', 'grid-cols-4', 'sm:grid-cols-6', 'md:grid-cols-8', 'gap-3', 'md:gap-4'];
+            avatarGrid.classList.remove('avatar-grid-orbit', 'is-spinning');
+            gridClasses.forEach(cls => avatarGrid.classList.add(cls));
+            avatarGrid.innerHTML = shuffled.map((participant) => {
+                return `
+                <div class="avatar-cell w-12 h-12 md:w-14 md:h-14 ${participant.hasWon ? 'has-won' : ''}" data-id="${participant.id}">
+                    <img src="${getAvatarUrl(participant)}" alt="${participant.name}" class="w-full h-full object-cover rounded-full" loading="lazy" onerror="this.closest('.avatar-cell').classList.add('is-fallback'); this.style.display='none';">
+                    <div class="avatar-fallback">${getAvatarInitial(participant)}</div>
+                    <div class="avatar-name">${participant.name}</div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function renderSphereOverlay() {
+            const existing = document.getElementById('sphere-overlay');
+            if (existing) {
+                existing.remove();
+            }
+            const overlay = document.createElement('div');
+            overlay.id = 'sphere-overlay';
+            overlay.className = 'sphere-overlay is-spinning';
+            overlay.innerHTML = '<div class="avatar-sphere"></div>';
+            document.body.appendChild(overlay);
+            const sphere = overlay.querySelector('.avatar-sphere');
+            const shuffled = shuffleArray([...participants]).slice(0, 48);
+            sphere.innerHTML = shuffled.map((participant, index) => {
+                const orbit = getOrbitStyle(sphere);
+                const spherePos = getSpherePosition(index, shuffled.length);
+                return `
+                <div class="avatar-cell is-orbit w-12 h-12 md:w-14 md:h-14 ${participant.hasWon ? 'has-won' : ''}" data-id="${participant.id}" style="--rx: ${spherePos.rx.toFixed(2)}deg; --ry: ${spherePos.ry.toFixed(2)}deg; --radius: ${orbit.radius};">
+                    <img src="${getAvatarUrl(participant)}" alt="${participant.name}" class="w-full h-full object-cover rounded-full" loading="lazy" onerror="this.closest('.avatar-cell').classList.add('is-fallback'); this.style.display='none';">
+                    <div class="avatar-fallback">${getAvatarInitial(participant)}</div>
+                    <div class="avatar-name">${participant.name}</div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function clearSphereOverlay() {
+            const overlay = document.getElementById('sphere-overlay');
+            if (!overlay) return;
+            overlay.classList.add('is-exiting');
+            setTimeout(() => overlay.remove(), 400);
+        }
+
+        function clearAvatarHighlights() {
+            const avatarGrid = document.getElementById('avatar-grid');
+            if (!avatarGrid) return;
+            avatarGrid.querySelectorAll('.avatar-cell').forEach(cell => {
+                cell.classList.remove('is-active', 'is-winner');
+            });
+        }
+
+        function startCountdown() {
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + 7);
+
+            const countdown = setInterval(() => {
+                const now = new Date();
+                const diff = endDate - now;
+
+                if (diff <= 0) {
+                    clearInterval(countdown);
+                    document.getElementById('days').querySelector('span').textContent = '00';
+                    document.getElementById('hours').querySelector('span').textContent = '00';
+                    document.getElementById('minutes').querySelector('span').textContent = '00';
+                    document.getElementById('seconds').querySelector('span').textContent = '00';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').querySelector('span').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').querySelector('span').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').querySelector('span').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').querySelector('span').textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
+        }
+        function renderParticipants() {
+            const participantsList = document.getElementById('participants-list');
+
+            if (participants.length === 0) {
+                participantsList.innerHTML = '<div class="text-center py-8 text-gray-500">暂无参与人员</div>';
+                return;
+            }
+
+            participantsList.innerHTML = participants.map((participant, index) => `
+                <div class="flex items-center justify-between bg-ebony p-3 rounded-lg hover:bg-gold/5 transition-colors ${participant.hasWon ? 'bg-gold/10' : ''}">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 ${participant.hasWon ? 'bg-gold/40' : 'bg-gold/20'} rounded-full flex items-center justify-center mr-3">
+                            <span class="text-gold text-sm font-bold">${index + 1}</span>
+                        </div>
+                        <div>
+                            <div class="font-medium ${participant.hasWon ? 'text-gold' : 'text-white'}">${participant.name}</div>
+                            <div class="text-sm text-gray-400">${participant.joinedAt.split(' ')[1]}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        ${participant.hasWon ? 
+                            '<span class="text-xs bg-gold/20 text-gold px-2 py-1 rounded mr-2">已中奖</span>' : 
+                            '<span class="text-xs bg-ebony text-gray-400 px-2 py-1 rounded mr-2">未中奖</span>'
+                        }
+                        <div class="text-sm text-gold/70">${participant.joinedAt.split(' ')[1]}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('total-participants').textContent = `共${participants.length} 人`;
+
+            const wonCount = participants.filter(p => p.hasWon).length;
+            const remainingCount = participants.length - wonCount;
+
+            const drawBtn = document.getElementById('draw-btn');
+            if (remainingCount === 0) {
+                drawBtn.disabled = true;
+                drawBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                drawBtn.textContent = "所有参与者已中奖";
+            } else {
+                drawBtn.disabled = false;
+                drawBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                drawBtn.innerHTML = '<i class="fa-solid fa-gift mr-2"></i> 立即抽奖';
+            }
+        }
+
+        function renderWinners() {
+            const winnersList = document.getElementById('winners-list');
+
+            if (winners.length === 0) {
+                winnersList.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="text-center py-8 text-gray-500">暂无中奖记录</td>
+                    </tr>
+                `;
+            } else {
+                winnersList.innerHTML = winners.map((winner, index) => `
+                    <tr class="border-b border-gold/10 hover:bg-gold/5 transition-colors">
+                        <td class="py-3">
+                            <div class="w-6 h-6 bg-gold/20 rounded-full flex items-center justify-center">
+                                ${index + 1}
+                            </div>
+                        </td>
+                        <td class="py-3">
+                            <div class="font-medium">${winner.name}</div>
+                            <div class="text-sm text-gray-400">${winner.time}</div>
+                        </td>
+                        <td class="py-3">
+                            <div class="text-gold-light font-medium">${winner.prizeName}</div>
+                        </td>
+                        <td class="py-3 text-sm text-gray-400">${winner.time}</td>
+                    </tr>
+                `).join('');
+            }
+
+            document.getElementById('total-winners').textContent = `共${winners.length} 人`;
+        }
+        function updatePrizeStock(prizeId) {
+            const prize = prizes.find(p => p.id === prizeId);
+            if (!prize) return;
+
+            const stockElement = document.getElementById(`stock-${prizeId}`);
+            if (stockElement) {
+                const remaining = prize.stock - prize.claimed;
+                stockElement.textContent = remaining > 0 ? remaining : 0;
+            }
+
+            const claimedElement = document.getElementById(`claimed-${prizeId}`);
+            if (claimedElement) {
+                claimedElement.textContent = prize.claimed;
+            }
+        }
+
+        function updateMarquee() {
+            const marqueeText = document.getElementById('marquee-text');
+            const lastWinner = winners[winners.length - 1];
+
+            if (lastWinner) {
+                marqueeText.textContent = `恭喜 ${lastWinner.name} 获得 ${lastWinner.prizeName}！`;
+                document.getElementById('marquee-container').classList.add('marquee');
+            } else {
+                marqueeText.textContent = "欢迎参与大利万维年终抽奖盛典！";
+                document.getElementById('marquee-container').classList.remove('marquee');
+            }
+        }
+
+        function renderNameCloud() {
+            const nameCloud = document.getElementById('name-cloud');
+            if (!nameCloud) return;
+            const names = participants.map(p => p.name);
+            nameCloud.innerHTML = names.map((name) => {
+                const size = (14 + Math.random() * 14).toFixed(1);
+                const opacity = (0.45 + Math.random() * 0.5).toFixed(2);
+                const delay = (Math.random() * 1.2).toFixed(2);
+                const ry = (Math.random() * 360).toFixed(1);
+                const z = (120 + Math.random() * 220).toFixed(1);
+                const x = (-60 + Math.random() * 120).toFixed(1);
+                const y = (-120 + Math.random() * 240).toFixed(1);
+                const scale = (0.8 + Math.random() * 0.6).toFixed(2);
+                const dimClass = Math.random() > 0.6 ? 'dim' : '';
+                return `<span class="name-item ${dimClass}" style="font-size:${size}px; opacity:${opacity}; animation-delay:${delay}s; --ry:${ry}deg; --z:${z}px; --x:${x}px; --y:${y}px; --s:${scale};">${name}</span>`;
+            }).join('');
+        }
+
+        function spawnPetals() {
+            const existing = document.getElementById('petal-layer');
+            if (existing) existing.remove();
+            const layer = document.createElement('div');
+            layer.id = 'petal-layer';
+            layer.className = 'petal-layer';
+            document.body.appendChild(layer);
+            const startTime = Date.now();
+            const spawnInterval = setInterval(() => {
+                const now = Date.now();
+                if (now - startTime >= 4000) {
+                    clearInterval(spawnInterval);
+                    setTimeout(() => layer.remove(), 2000);
+                    return;
+                }
+                const batch = 6;
+                for (let i = 0; i < batch; i++) {
+                    const left = (Math.random() * 100).toFixed(2);
+                    const size = (6 + Math.random() * 8).toFixed(1);
+                    const duration = (1.6 + Math.random() * 1.2).toFixed(2);
+                    const delay = (Math.random() * 0.4).toFixed(2);
+                    const petal = document.createElement('span');
+                    petal.className = 'petal';
+                    petal.style.left = `${left}%`;
+                    petal.style.width = `${size}px`;
+                    petal.style.height = `${(size * 1.4).toFixed(1)}px`;
+                    petal.style.setProperty('--duration', `${duration}s`);
+                    petal.style.animationDelay = `${delay}s`;
+                    layer.appendChild(petal);
+                }
+            }, 120);
+        }
+        function initDrawFunction() {
+            const drawBtn = document.getElementById('draw-btn');
+            const avatarGrid = document.getElementById('avatar-grid');
+            const winnerOverlay = document.getElementById('winner-overlay');
+            const winnerOverlayAvatar = document.getElementById('winner-overlay-avatar');
+            const winnerOverlayName = document.getElementById('winner-overlay-name');
+            const winnerOverlayPrize = document.getElementById('winner-overlay-prize');
+            const nameCloud = document.getElementById('name-cloud');
+
+            let isDrawing = false;
+            let lastActiveCell = null;
+
+            const getAvailableCells = () => {
+                if (!avatarGrid) return [];
+                return Array.from(avatarGrid.querySelectorAll('.avatar-cell')).filter(cell => !cell.classList.contains('has-won'));
+            };
+
+            const highlightCell = (cell) => {
+                if (!cell) return;
+                if (lastActiveCell && lastActiveCell !== cell) {
+                    lastActiveCell.classList.remove('is-active');
+                }
+                cell.classList.add('is-active');
+                lastActiveCell = cell;
+            };
+
+            drawBtn.addEventListener('click', () => {
+                if (isDrawing) return;
+
+                const availableParticipants = participants.filter(p => !p.hasWon);
+                if (availableParticipants.length === 0) {
+                    alert('所有参与者都已中奖！');
+                    return;
+                }
+
+                const availablePrizes = prizes.filter(p => p.claimed < p.stock);
+                if (availablePrizes.length === 0) {
+                    alert('所有奖品已抽完！');
+                    return;
+                }
+
+                isDrawing = true;
+                drawBtn.disabled = true;
+                drawBtn.classList.add('opacity-50');
+
+                document.body.classList.add('is-drawing');
+                if (nameCloud) {
+                    nameCloud.classList.remove('is-visible');
+                }
+
+                renderAvatarPool();
+                renderSphereOverlay();
+                clearAvatarHighlights();
+                if (winnerOverlay) {
+                    winnerOverlay.classList.remove('is-visible');
+                }
+
+                let rotationCount = 0;
+                const rotationInterval = setInterval(() => {
+                    const availableCells = getAvailableCells();
+                    if (availableCells.length === 0) return;
+                    const randomCell = availableCells[Math.floor(Math.random() * availableCells.length)];
+                    highlightCell(randomCell);
+                    rotationCount++;
+
+                    if (rotationCount >= 24) {
+                        clearInterval(rotationInterval);
+
+                        const randomParticipantIndex = Math.floor(Math.random() * availableParticipants.length);
+                        const selectedParticipant = availableParticipants[randomParticipantIndex];
+
+                        const finalPrizeIndex = Math.floor(Math.random() * availablePrizes.length);
+                        const finalPrize = availablePrizes[finalPrizeIndex];
+
+                        if (finalPrize.claimed < finalPrize.stock) {
+                            finalPrize.claimed++;
+                        } else {
+                            alert('该奖品已抽完！');
+                            isDrawing = false;
+                            drawBtn.disabled = false;
+                            drawBtn.classList.remove('opacity-50');
+                            return;
+                        }
+
+                        const participantIndex = participants.findIndex(p => p.id === selectedParticipant.id);
+                        if (participantIndex !== -1) {
+                            participants[participantIndex].hasWon = true;
+                        }
+
+                        const winnerRecord = {
+                            id: winners.length + 1,
+                            name: selectedParticipant.name,
+                            prizeId: finalPrize.id,
+                            prizeName: finalPrize.name,
+                            time: new Date().toLocaleString('zh-CN')
+                        };
+
+                        winners.unshift(winnerRecord);
+
+                        if (winners.length > 50) {
+                            winners.pop();
+                        }
+
+                        updatePrizeStock(finalPrize.id);
+                        renderParticipants();
+                        renderWinners();
+                        updateMarquee();
+                        renderAvatarPool();
+                        clearSphereOverlay();
+
+                        clearAvatarHighlights();
+                        if (avatarGrid) {
+                            const winnerCell = avatarGrid.querySelector(`[data-id="${selectedParticipant.id}"]`);
+                            if (winnerCell) {
+                                winnerCell.classList.add('is-winner');
+                            }
+                        }
+                        if (winnerOverlay && winnerOverlayAvatar && winnerOverlayName) {
+                            winnerOverlayAvatar.src = getAvatarUrl(selectedParticipant);
+                            winnerOverlayName.textContent = selectedParticipant.name;
+                            if (winnerOverlayPrize) {
+                                winnerOverlayPrize.textContent = finalPrize.name;
+                            }
+                            winnerOverlay.classList.add('is-visible');
+                            setTimeout(() => {
+                                winnerOverlay.classList.remove('is-visible');
+                            }, 5000);
+                        }
+                        spawnPetals();
+                        if (nameCloud) {
+                            nameCloud.classList.remove('is-visible');
+                        }
+                        document.body.classList.remove('is-drawing');
+                        clearSphereOverlay();
+                        isDrawing = false;
+                        drawBtn.disabled = false;
+                        drawBtn.classList.remove('opacity-50');
+                    }
+                }, 120);
+            });
+
+            // Reset button removed.
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            startCountdown();
+            renderParticipants();
+            renderAvatarPool();
+            renderWinners();
+            initDrawFunction();
+
+            prizes.forEach(prize => updatePrizeStock(prize.id));
+            setInterval(updateMarquee, 10000);
+        });
+    </script>
+
+    <div id="name-cloud" class="name-cloud"></div>
+
+    <div id="winner-overlay" class="winner-overlay">
+        <div class="winner-card">
+            <img id="winner-overlay-avatar" class="winner-avatar" src="" alt="中奖者头像">
+            <div id="winner-overlay-name" class="winner-name">中奖者</div>
+            <div id="winner-overlay-prize" class="winner-prize">奖项</div>
+        </div>
+    </div>
+
+</body>
+</html>
