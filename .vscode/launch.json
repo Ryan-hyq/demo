@@ -14,8 +14,8 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open 年终抽奖.html",
-            "file": "c:\\Users\\Administrator\\.codex\\demo\\年终抽奖.html"
+            "name": "Open index.html",
+            "file": "c:\\Users\\Administrator\\.codex\\demo\\index.html"
         }
     ]
 }
