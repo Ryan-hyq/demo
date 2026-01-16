@@ -43,6 +43,27 @@
                 color: #f4eee3;
                 letter-spacing: 0.02em;
             }
+            body.lang-en {
+                font-family: "Times New Roman", Times, serif;
+            }
+            body.lang-en * {
+                font-family: "Times New Roman", Times, serif;
+            }
+            body.lang-zh {
+                font-family: "SimSun", "Songti SC", "STSong", serif;
+            }
+            body.lang-zh * {
+                font-family: "SimSun", "Songti SC", "STSong", serif;
+            }
+            .fa-solid,
+            .fa-regular {
+                font-family: "Font Awesome 6 Free" !important;
+                font-weight: 900;
+            }
+            .fa-brands {
+                font-family: "Font Awesome 6 Brands" !important;
+                font-weight: 400;
+            }
             .text-shadow-gold {
                 text-shadow: 0 0 8px rgba(255, 214, 128, 0.55), 0 0 18px rgba(211, 169, 77, 0.5);
             }
@@ -453,13 +474,17 @@
                     <i class="fa-solid fa-smoking text-ebony-dark text-2xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gold text-shadow-gold">
+                    <h1 id="site-title" class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gold text-shadow-gold">
                         大利万维 · 年终盛典
                     </h1>
-                    <p class="text-gold/80 text-sm md:text-base">感恩同行 · 幸运抽奖</p>
+                    <p id="site-subtitle" class="text-gold/80 text-sm md:text-base">感恩同行 · 幸运抽奖</p>
                 </div>
             </div>
-            
+            <div class="flex items-center gap-3 mt-4 md:mt-0">
+                <button id="lang-toggle" class="relative overflow-hidden border border-gold/60 text-gold px-4 py-2 rounded-full text-sm tracking-[0.2em] uppercase bg-ebony-dark/80 backdrop-blur hover:border-gold hover:text-gold-light transition-all duration-300 shadow-[0_0_20px_rgba(202,163,87,0.35)]">
+                    EN
+                </button>
+            </div>
         </div>
     </header>
 
@@ -467,25 +492,25 @@
         <main class="container mx-auto px-4 py-12">
         <!-- 抽奖倒计时 -->
         <section class="mb-16 text-center">
-            <h2 class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-6 text-gold text-shadow-gold">
+            <h2 id="countdown-title" class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-6 text-gold text-shadow-gold">
                 抽奖倒计时
             </h2>
             <div class="flex justify-center gap-4 md:gap-6 lg:gap-8 flex-wrap">
                 <div id="days" class="countdown-pulse w-20 md:w-24 h-20 md:h-24 bg-ebony-light border-2 border-gold rounded-lg flex flex-col items-center justify-center border-gold-glow">
                     <span class="text-2xl md:text-3xl font-bold text-gold">00</span>
-                    <span class="text-xs md:text-sm text-gold/80">天</span>
+                    <span id="label-days" class="text-xs md:text-sm text-gold/80">天</span>
                 </div>
                 <div id="hours" class="countdown-pulse w-20 md:w-24 h-20 md:h-24 bg-ebony-light border-2 border-gold rounded-lg flex flex-col items-center justify-center border-gold-glow">
                     <span class="text-2xl md:text-3xl font-bold text-gold">00</span>
-                    <span class="text-xs md:text-sm text-gold/80">时</span>
+                    <span id="label-hours" class="text-xs md:text-sm text-gold/80">时</span>
                 </div>
                 <div id="minutes" class="countdown-pulse w-20 md:w-24 h-20 md:h-24 bg-ebony-light border-2 border-gold rounded-lg flex flex-col items-center justify-center border-gold-glow">
                     <span class="text-2xl md:text-3xl font-bold text-gold">00</span>
-                    <span class="text-xs md:text-sm text-gold/80">分</span>
+                    <span id="label-minutes" class="text-xs md:text-sm text-gold/80">分</span>
                 </div>
                 <div id="seconds" class="countdown-pulse w-20 md:w-24 h-20 md:h-24 bg-ebony-light border-2 border-gold rounded-lg flex flex-col items-center justify-center border-gold-glow">
                     <span class="text-2xl md:text-3xl font-bold text-gold">00</span>
-                    <span class="text-xs md:text-sm text-gold/80">秒</span>
+                    <span id="label-seconds" class="text-xs md:text-sm text-gold/80">秒</span>
                 </div>
             </div>
         </section>
@@ -493,7 +518,7 @@
         <!-- 抽奖展示区域 -->
         <section class="mb-16">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-8 text-center text-gold text-shadow-gold">
+                <h2 id="avatar-section-title" class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-8 text-center text-gold text-shadow-gold">
                     头像池 · 惊喜大奖
                 </h2>
                 
@@ -501,7 +526,7 @@
                 <div class="mb-8">
                     <div id="avatar-pool" class="avatar-pool p-6 md:p-8">
                         <div class="flex items-center justify-between mb-4">
-                            <div class="text-gold font-semibold tracking-wide">头像池</div>
+                            <div id="avatar-pool-label" class="text-gold font-semibold tracking-wide">头像池</div>
                             <div class="text-xs text-gold/70"></div>
                         </div>
                         <div id="avatar-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 md:gap-4 relative w-full z-10">
@@ -512,8 +537,8 @@
 
                 <!-- 抽奖按钮 -->
                 <div class="text-center">
-                    <button id="draw-btn" class="bg-gradient-gold text-ebony-dark font-bold py-3 px-10 rounded-full text-lg hover:scale-105 transition-all duration-300 border-gold-glow">
-                        <i class="fa-solid fa-gift mr-2"></i> 立即抽奖
+                    <button id="draw-btn" class="bg-gradient-gold text-ebony-dark font-bold py-3 px-10 rounded-full text-lg hover:scale-105 transition-all duration-300 border-gold-glow inline-flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-gift"></i>立即抽奖
                     </button>
                 </div>
             </div>
@@ -524,20 +549,20 @@
                 <!-- 实时中奖名单 -->
                 <div class="bg-ebony-light border border-gold/50 rounded-xl p-6">
                     <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-xl font-bold text-gold">
+                        <h2 id="winners-title" class="text-xl font-bold text-gold">
                             <i class="fa-solid fa-trophy mr-2"></i> 实时中奖名单
                         </h2>
-                        <span id="total-winners" class="bg-gold/20 text-gold px-3 py-1 rounded-full text-sm">共0 人</span>
+                        <span id="total-winners" class="bg-gold/20 text-gold px-3 py-1 rounded-full text-sm">共0人</span>
                     </div>
                     
                     <div class="overflow-y-auto max-h-96 scrollbar-custom">
                         <table class="w-full">
                             <thead>
                                 <tr class="border-b border-gold/30">
-                                    <th class="text-left py-3 text-gold">序号</th>
-                                    <th class="text-left py-3 text-gold">中奖人</th>
-                                    <th class="text-left py-3 text-gold">奖品</th>
-                                    <th class="text-left py-3 text-gold">时间</th>
+                                    <th id="winners-header-index" class="text-left py-3 text-gold">序号</th>
+                                    <th id="winners-header-name" class="text-left py-3 text-gold">中奖人</th>
+                                    <th id="winners-header-prize" class="text-left py-3 text-gold">奖品</th>
+                                    <th id="winners-header-time" class="text-left py-3 text-gold">时间</th>
                                 </tr>
                             </thead>
                             <tbody id="winners-list">
@@ -551,17 +576,17 @@
                     
                     <div class="mt-4 text-sm text-gray-400">
                         <i class="fa-solid fa-info-circle mr-2"></i>
-                        每10分钟自动更新中奖名单，最多显示50条记录
+                        <span id="winners-note">每10分钟自动更新中奖名单，最多显示50条记录</span>
                     </div>
                 </div>
                 
                 <!-- 参与抽奖人员名单 -->
                 <div class="bg-ebony-light border border-gold/50 rounded-xl p-6">
                     <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-xl font-bold text-gold">
+                        <h2 id="participants-title" class="text-xl font-bold text-gold">
                             <i class="fa-solid fa-users mr-2"></i> 参与抽奖人员
                         </h2>
-                        <span id="total-participants" class="bg-gold/20 text-gold px-3 py-1 rounded-full text-sm">共0 人</span>
+                        <span id="total-participants" class="bg-gold/20 text-gold px-3 py-1 rounded-full text-sm">共0人</span>
                     </div>
                     
                     <div class="overflow-y-auto max-h-80 scrollbar-custom">
@@ -573,7 +598,7 @@
                     
                     <div class="mt-6">
                         <div class="flex items-center justify-between">
-                            <span class="text-gold/80 text-sm">实时抽奖动态</span>
+                            <span id="live-updates-label" class="text-gold/80 text-sm">实时抽奖动态</span>
                         </div>
                         <div class="bg-ebony mt-2 p-3 rounded-lg overflow-hidden">
                             <div id="marquee-container" class="whitespace-nowrap">
@@ -586,7 +611,7 @@
         </section>
         <!-- 奖品列表区域 -->
         <section class="mb-16">
-            <h2 class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-8 text-center text-gold text-shadow-gold">
+            <h2 id="prize-list-title" class="text-[clamp(1.2rem,2vw,2rem)] font-bold mb-8 text-center text-gold text-shadow-gold">
                 奖品一览
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -594,11 +619,10 @@
                 <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105" data-prize-id="1">
                     <img src="https://picsum.photos/seed/vapor1/400/200" alt="一等奖 - 旗舰款电子烟套装" class="w-full h-40 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-bold text-gold">一等奖 · 旗舰款电子烟套装</h3>
-                        <p class="text-gray-300 mt-2">包含旗舰主机*1 + 雾化弹*6 + 定制收纳盒</p>
+                        <h3 class="prize-title text-lg font-bold text-gold">一等奖 · 1000元</h3>
                         <div class="mt-2 flex items-center justify-between">
-                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-1">3</span> 个</span>
-                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-1">0</span> 人</span>
+                            <span class="text-sm text-gold/70"><span class="prize-remaining-label">剩余</span>：<span class="font-bold" id="stock-1">3</span><span class="prize-remaining-unit">个</span></span>
+                            <span class="text-sm text-gold/70"><span class="prize-claimed-label">已中</span>：<span class="font-bold" id="claimed-1">0</span><span class="prize-claimed-unit">人</span></span>
                         </div>
                     </div>
                 </div>
@@ -607,11 +631,10 @@
                 <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105" data-prize-id="2">
                     <img src="https://picsum.photos/seed/vapor2/400/200" alt="二等奖 - 高端雾化弹礼盒" class="w-full h-40 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-bold text-gold">二等奖 · 高端雾化弹礼盒</h3>
-                        <p class="text-gray-300 mt-2">限量版雾化弹*12 + 定制烟灰缸</p>
+                        <h3 class="prize-title text-lg font-bold text-gold">二等奖 · 5000元</h3>
                         <div class="mt-2 flex items-center justify-between">
-                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-2">5</span> 个</span>
-                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-2">0</span> 人</span>
+                            <span class="text-sm text-gold/70"><span class="prize-remaining-label">剩余</span>：<span class="font-bold" id="stock-2">5</span><span class="prize-remaining-unit">个</span></span>
+                            <span class="text-sm text-gold/70"><span class="prize-claimed-label">已中</span>：<span class="font-bold" id="claimed-2">0</span><span class="prize-claimed-unit">人</span></span>
                         </div>
                     </div>
                 </div>
@@ -620,11 +643,10 @@
                 <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105" data-prize-id="3">
                     <img src="https://picsum.photos/seed/vapor3/400/200" alt="三等奖 - 定制电子烟配件包" class="w-full h-40 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-bold text-gold">三等奖 · 定制电子烟配件包</h3>
-                        <p class="text-gray-300 mt-2">充电底座*1 + 清洁套装*1 + 挂绳*1</p>
+                        <h3 class="prize-title text-lg font-bold text-gold">三等奖 · 3000元</h3>
                         <div class="mt-2 flex items-center justify-between">
-                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-3">10</span> 个</span>
-                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-3">0</span> 人</span>
+                            <span class="text-sm text-gold/70"><span class="prize-remaining-label">剩余</span>：<span class="font-bold" id="stock-3">10</span><span class="prize-remaining-unit">个</span></span>
+                            <span class="text-sm text-gold/70"><span class="prize-claimed-label">已中</span>：<span class="font-bold" id="claimed-3">0</span><span class="prize-claimed-unit">人</span></span>
                         </div>
                     </div>
                 </div>
@@ -633,11 +655,10 @@
                 <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105" data-prize-id="4">
                     <img src="https://picsum.photos/seed/vapor4/400/200" alt="四等奖 - 体验装雾化弹" class="w-full h-40 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-bold text-gold">四等奖 · 体验装雾化弹</h3>
-                        <p class="text-gray-300 mt-2">多种口味雾化弹*3</p>
+                        <h3 class="prize-title text-lg font-bold text-gold">四等奖 · 2000元</h3>
                         <div class="mt-2 flex items-center justify-between">
-                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-4">20</span> 个</span>
-                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-4">0</span> 人</span>
+                            <span class="text-sm text-gold/70"><span class="prize-remaining-label">剩余</span>：<span class="font-bold" id="stock-4">20</span><span class="prize-remaining-unit">个</span></span>
+                            <span class="text-sm text-gold/70"><span class="prize-claimed-label">已中</span>：<span class="font-bold" id="claimed-4">0</span><span class="prize-claimed-unit">人</span></span>
                         </div>
                     </div>
                 </div>
@@ -646,14 +667,13 @@
                 <div class="bg-ebony-light border border-gold/50 rounded-xl overflow-hidden hover:border-gold transition-all duration-300 hover:scale-105 sm:col-span-2 sm:justify-self-center sm:max-w-md lg:col-span-1 lg:max-w-none" data-prize-id="5">
                     <img src="https://picsum.photos/seed/vapor5/400/200" alt="五等奖 - 品牌周边礼盒" class="w-full h-40 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-bold text-gold">五等奖 · 品牌周边礼盒</h3>
-                        <p class="text-gray-300 mt-2">品牌T恤*1 + 保温杯*1</p>
+                        <h3 class="prize-title text-lg font-bold text-gold">五等奖 · 1000元</h3>
                         <div class="mt-2 flex items-center justify-between">
-                            <span class="text-sm text-gold/70">剩余：<span class="font-bold" id="stock-5">30</span> 个</span>
-                            <span class="text-sm text-gold/70">已中：<span class="font-bold" id="claimed-5">0</span> 人</span>
+                            <span class="text-sm text-gold/70"><span class="prize-remaining-label">剩余</span>：<span class="font-bold" id="stock-5">30</span><span class="prize-remaining-unit">个</span></span>
+                            <span class="text-sm text-gold/70"><span class="prize-claimed-label">已中</span>：<span class="font-bold" id="claimed-5">0</span><span class="prize-claimed-unit">人</span></span>
                         </div>
                     </div>
-                </div>
+                </div> 
                 
             </div>
         </section>
@@ -663,7 +683,7 @@
     <!-- 页脚 -->
     <footer class="bg-ebony border-t border-gold/30 py-8 px-4">
         <div class="container mx-auto text-center">
-            <p class="text-gold/80 mb-4">(C) 2025 深圳大利万维科技有限公司 版权所有</p>
+            <p id="footer-copyright" class="text-gold/80 mb-4">(C) 2025 深圳大利万维科技有限公司 版权所有</p>
             <div class="flex justify-center gap-4 mb-6">
                 <a href="#" class="text-gold/80 hover:text-gold transition-colors"><i class="fa-brands fa-weixin text-xl"></i></a>
                 <a href="#" class="text-gold/80 hover:text-gold transition-colors"><i class="fa-brands fa-weibo text-xl"></i></a>
@@ -675,38 +695,285 @@
 
     <!-- JavaScript逻辑 -->
     <script>
+        const i18n = {
+            zh: {
+                langToggle: "EN",
+                pageTitle: "XX电子烟- 年终盛典抽奖",
+                siteTitle: "大利万维 · 年终盛典",
+                siteSubtitle: "感恩同行 · 幸运抽奖",
+                countdownTitle: "抽奖倒计时",
+                labelDays: "天",
+                labelHours: "时",
+                labelMinutes: "分",
+                labelSeconds: "秒",
+                avatarSectionTitle: "头像池 · 惊喜大奖",
+                avatarPoolLabel: "头像池",
+                drawNow: "立即抽奖",
+                drawDone: "所有参与者已中奖",
+                winnersTitle: "实时中奖名单",
+                winnersHeaderIndex: "序号",
+                winnersHeaderName: "中奖人",
+                winnersHeaderPrize: "奖品",
+                winnersHeaderTime: "时间",
+                winnersEmpty: "暂无中奖记录",
+                winnersNote: "每10分钟自动更新中奖名单，最多显示50条记录",
+                participantsTitle: "参与抽奖人员",
+                participantsEmpty: "暂无参与人员",
+                statusWon: "已中奖",
+                statusNotWon: "未中奖",
+                liveUpdates: "实时抽奖动态",
+                marqueeWelcome: "欢迎参与大利万维年终抽奖盛典！",
+                marqueeWinner: "恭喜 {name} 获得 {prize}！",
+                totalParticipants: "共{count}人",
+                totalWinners: "共{count}人",
+                prizeListTitle: "奖品一览",
+                prizeRemainingLabel: "剩余",
+                prizeClaimedLabel: "已中",
+                prizeRemainingUnit: "个",
+                prizeClaimedUnit: "人",
+                footerCopyright: "(C) 2025 深圳大利万维科技有限公司 版权所有",
+                overlayWinnerName: "中奖者",
+                overlayWinnerPrize: "奖项",
+                alertAllWon: "所有参与者都已中奖！",
+                alertAllPrizes: "所有奖品已抽完！",
+                alertPrizeSoldOut: "该奖品已抽完！",
+                participantFallback: "参与者{num}"
+            },
+            en: {
+                langToggle: "中文",
+                pageTitle: "XX Vape - Year-End Gala Draw",
+                siteTitle: "Dali Wanwei · Year-End Gala",
+                siteSubtitle: "Thank You All · Lucky Draw",
+                countdownTitle: "Draw Countdown",
+                labelDays: "Days",
+                labelHours: "Hours",
+                labelMinutes: "Minutes",
+                labelSeconds: "Seconds",
+                avatarSectionTitle: "Avatar Pool · Surprise Prizes",
+                avatarPoolLabel: "Avatar Pool",
+                drawNow: "Draw Now",
+                drawDone: "All participants have won",
+                winnersTitle: "Live Winners",
+                winnersHeaderIndex: "No.",
+                winnersHeaderName: "Winner",
+                winnersHeaderPrize: "Prize",
+                winnersHeaderTime: "Time",
+                winnersEmpty: "No winners yet",
+                winnersNote: "Updates every 10 minutes, up to 50 records",
+                participantsTitle: "Participants",
+                participantsEmpty: "No participants",
+                statusWon: "Won",
+                statusNotWon: "Not Won",
+                liveUpdates: "Live Updates",
+                marqueeWelcome: "Welcome to the Dali Wanwei year-end draw!",
+                marqueeWinner: "Congrats {name} on winning {prize}!",
+                totalParticipants: "Total {count}",
+                totalWinners: "Total {count}",
+                prizeListTitle: "Prize List",
+                prizeRemainingLabel: "Remaining",
+                prizeClaimedLabel: "Claimed",
+                prizeRemainingUnit: " pcs",
+                prizeClaimedUnit: " people",
+                footerCopyright: "(C) 2025 Shenzhen Dali Wanwei Technology Co., Ltd. All rights reserved.",
+                overlayWinnerName: "Winner",
+                overlayWinnerPrize: "Prize",
+                alertAllWon: "All participants have already won!",
+                alertAllPrizes: "All prizes have been claimed!",
+                alertPrizeSoldOut: "This prize is sold out!",
+                participantFallback: "Participant {num}"
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'zh';
+
+        function formatString(template, vars) {
+            if (!vars) return template;
+            return template.replace(/\{(\w+)\}/g, (_, key) => vars[key] ?? '');
+        }
+
+        function t(key, vars) {
+            const langPack = i18n[currentLang] || i18n.zh;
+            const fallback = i18n.zh || {};
+            return formatString(langPack[key] || fallback[key] || key, vars);
+        }
+
+        function getLocale() {
+            return currentLang === 'zh' ? 'zh-CN' : 'en-US';
+        }
+
+        function getPrizeName(prize) {
+            if (!prize) return '';
+            if (typeof prize.name === 'string') return prize.name;
+            return prize.name[currentLang] || prize.name.zh || '';
+        }
+
+        function getPrizeDesc(prize) {
+            if (!prize || !prize.desc) return '';
+            return prize.desc[currentLang] || prize.desc.zh || '';
+        }
+
+        function updatePrizeCards() {
+            document.querySelectorAll('[data-prize-id]').forEach(card => {
+                const prizeId = Number(card.dataset.prizeId);
+                const prize = prizes.find(item => item.id === prizeId);
+                if (!prize) return;
+                const title = card.querySelector('.prize-title');
+                const desc = card.querySelector('.prize-desc');
+                const img = card.querySelector('img');
+                if (title) title.textContent = getPrizeName(prize);
+                if (desc) desc.textContent = getPrizeDesc(prize);
+                if (img) img.alt = getPrizeName(prize);
+            });
+
+            document.querySelectorAll('.prize-remaining-label').forEach(el => {
+                el.textContent = t('prizeRemainingLabel');
+            });
+            document.querySelectorAll('.prize-claimed-label').forEach(el => {
+                el.textContent = t('prizeClaimedLabel');
+            });
+            document.querySelectorAll('.prize-remaining-unit').forEach(el => {
+                el.textContent = t('prizeRemainingUnit');
+            });
+            document.querySelectorAll('.prize-claimed-unit').forEach(el => {
+                el.textContent = t('prizeClaimedUnit');
+            });
+        }
+
+        function applyLanguage() {
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            document.title = t('pageTitle');
+            document.body.classList.toggle('lang-en', currentLang === 'en');
+            document.body.classList.toggle('lang-zh', currentLang === 'zh');
+
+            const langToggle = document.getElementById('lang-toggle');
+            if (langToggle) {
+                langToggle.textContent = t('langToggle');
+            }
+
+            const title = document.getElementById('site-title');
+            if (title) title.textContent = t('siteTitle');
+            const subtitle = document.getElementById('site-subtitle');
+            if (subtitle) subtitle.textContent = t('siteSubtitle');
+            const countdownTitle = document.getElementById('countdown-title');
+            if (countdownTitle) countdownTitle.textContent = t('countdownTitle');
+            const labelDays = document.getElementById('label-days');
+            if (labelDays) labelDays.textContent = t('labelDays');
+            const labelHours = document.getElementById('label-hours');
+            if (labelHours) labelHours.textContent = t('labelHours');
+            const labelMinutes = document.getElementById('label-minutes');
+            if (labelMinutes) labelMinutes.textContent = t('labelMinutes');
+            const labelSeconds = document.getElementById('label-seconds');
+            if (labelSeconds) labelSeconds.textContent = t('labelSeconds');
+            const avatarTitle = document.getElementById('avatar-section-title');
+            if (avatarTitle) avatarTitle.textContent = t('avatarSectionTitle');
+            const avatarPoolLabel = document.getElementById('avatar-pool-label');
+            if (avatarPoolLabel) avatarPoolLabel.textContent = t('avatarPoolLabel');
+            const winnersTitle = document.getElementById('winners-title');
+            if (winnersTitle) winnersTitle.innerHTML = `<i class="fa-solid fa-trophy mr-2"></i> ${t('winnersTitle')}`;
+            const winnersHeaderIndex = document.getElementById('winners-header-index');
+            if (winnersHeaderIndex) winnersHeaderIndex.textContent = t('winnersHeaderIndex');
+            const winnersHeaderName = document.getElementById('winners-header-name');
+            if (winnersHeaderName) winnersHeaderName.textContent = t('winnersHeaderName');
+            const winnersHeaderPrize = document.getElementById('winners-header-prize');
+            if (winnersHeaderPrize) winnersHeaderPrize.textContent = t('winnersHeaderPrize');
+            const winnersHeaderTime = document.getElementById('winners-header-time');
+            if (winnersHeaderTime) winnersHeaderTime.textContent = t('winnersHeaderTime');
+            const winnersNote = document.getElementById('winners-note');
+            if (winnersNote) winnersNote.textContent = t('winnersNote');
+            const participantsTitle = document.getElementById('participants-title');
+            if (participantsTitle) participantsTitle.innerHTML = `<i class="fa-solid fa-users mr-2"></i> ${t('participantsTitle')}`;
+            const liveUpdates = document.getElementById('live-updates-label');
+            if (liveUpdates) liveUpdates.textContent = t('liveUpdates');
+            const prizeListTitle = document.getElementById('prize-list-title');
+            if (prizeListTitle) prizeListTitle.textContent = t('prizeListTitle');
+            const footer = document.getElementById('footer-copyright');
+            if (footer) footer.textContent = t('footerCopyright');
+            const winnerOverlay = document.getElementById('winner-overlay');
+            const overlayVisible = winnerOverlay && winnerOverlay.classList.contains('is-visible');
+            const winnerOverlayName = document.getElementById('winner-overlay-name');
+            const winnerOverlayPrize = document.getElementById('winner-overlay-prize');
+            const winnerOverlayAvatar = document.getElementById('winner-overlay-avatar');
+            if (!overlayVisible) {
+                if (winnerOverlayName) winnerOverlayName.textContent = t('overlayWinnerName');
+                if (winnerOverlayPrize) winnerOverlayPrize.textContent = t('overlayWinnerPrize');
+            }
+            if (winnerOverlayAvatar) {
+                winnerOverlayAvatar.alt = t('overlayWinnerName');
+            }
+
+            updatePrizeCards();
+            renderParticipants();
+            renderWinners();
+            updateMarquee();
+        }
+
         const prizes = [
             {
                 id: 1,
-                name: "一等奖 - 旗舰款电子烟套装",
+                name: {
+                    zh: "一等奖 · 1000元",
+                    en: "First Prize · RMB 1000"
+                },
+                desc: {
+                    zh: "包含旗舰主机*1 + 雾化弹*6 + 定制收纳盒",
+                    en: "Flagship device x1 + pods x6 + custom case"
+                },
                 img: "https://picsum.photos/seed/prize1/200/200",
                 stock: 3,
                 claimed: 0
             },
             {
                 id: 2,
-                name: "二等奖 - 高端雾化弹礼盒",
+                name: {
+                    zh: "二等奖 · 5000元",
+                    en: "Second Prize · RMB 5000"
+                },
+                desc: {
+                    zh: "限量版雾化弹*12 + 定制烟灰缸",
+                    en: "Limited pods x12 + custom ashtray"
+                },
                 img: "https://picsum.photos/seed/prize2/200/200",
                 stock: 5,
                 claimed: 0
             },
             {
                 id: 3,
-                name: "三等奖 - 定制电子烟配件包",
+                name: {
+                    zh: "三等奖 · 3000元",
+                    en: "Third Prize · RMB 3000"
+                },
+                desc: {
+                    zh: "充电底座*1 + 清洁套装*1 + 挂绳*1",
+                    en: "Charging base x1 + cleaning kit x1 + lanyard x1"
+                },
                 img: "https://picsum.photos/seed/prize3/200/200",
                 stock: 10,
                 claimed: 0
             },
             {
                 id: 4,
-                name: "四等奖 - 体验装雾化弹",
+                name: {
+                    zh: "四等奖 · 2000元",
+                    en: "Fourth Prize · RMB 2000"
+                },
+                desc: {
+                    zh: "多种口味雾化弹*3",
+                    en: "Pods x3 in assorted flavors"
+                },
                 img: "https://picsum.photos/seed/prize4/200/200",
                 stock: 20,
                 claimed: 0
             },
             {
                 id: 5,
-                name: "五等奖 - 品牌周边礼盒",
+                name: {
+                    zh: "五等奖 · 1000元",
+                    en: "Fifth Prize · RMB 1000"
+                },
+                desc: {
+                    zh: "品牌T恤*1 + 保温杯*1",
+                    en: "T-shirt x1 + thermos x1"
+                },
                 img: "https://picsum.photos/seed/prize5/200/200",
                 stock: 30,
                 claimed: 0
@@ -726,7 +993,8 @@
         }
 
         let participants = Array.from({ length: 130 }, (_, i) => {
-            const name = baseNames[i] || `参与者${String(i + 1).padStart(3, '0')}`;
+            const fallback = t('participantFallback', { num: String(i + 1).padStart(3, '0') });
+            const name = baseNames[i] || fallback;
             const joinedAt = new Date(2025, 0, 15, 10, 0, 0);
             joinedAt.setMinutes(joinedAt.getMinutes() + i * 3);
             return {
@@ -878,7 +1146,7 @@
             const participantsList = document.getElementById('participants-list');
 
             if (participants.length === 0) {
-                participantsList.innerHTML = '<div class="text-center py-8 text-gray-500">暂无参与人员</div>';
+                participantsList.innerHTML = `<div class="text-center py-8 text-gray-500">${t('participantsEmpty')}</div>`;
                 return;
             }
 
@@ -895,15 +1163,15 @@
                     </div>
                     <div class="flex items-center">
                         ${participant.hasWon ? 
-                            '<span class="text-xs bg-gold/20 text-gold px-2 py-1 rounded mr-2">已中奖</span>' : 
-                            '<span class="text-xs bg-ebony text-gray-400 px-2 py-1 rounded mr-2">未中奖</span>'
+                            `<span class="text-xs bg-gold/20 text-gold px-2 py-1 rounded mr-2">${t('statusWon')}</span>` : 
+                            `<span class="text-xs bg-ebony text-gray-400 px-2 py-1 rounded mr-2">${t('statusNotWon')}</span>`
                         }
                         <div class="text-sm text-gold/70">${participant.joinedAt.split(' ')[1]}</div>
                     </div>
                 </div>
             `).join('');
 
-            document.getElementById('total-participants').textContent = `共${participants.length} 人`;
+            document.getElementById('total-participants').textContent = t('totalParticipants', { count: participants.length });
 
             const wonCount = participants.filter(p => p.hasWon).length;
             const remainingCount = participants.length - wonCount;
@@ -912,11 +1180,11 @@
             if (remainingCount === 0) {
                 drawBtn.disabled = true;
                 drawBtn.classList.add('opacity-50', 'cursor-not-allowed');
-                drawBtn.textContent = "所有参与者已中奖";
+                drawBtn.textContent = t('drawDone');
             } else {
                 drawBtn.disabled = false;
                 drawBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                drawBtn.innerHTML = '<i class="fa-solid fa-gift mr-2"></i> 立即抽奖';
+                drawBtn.innerHTML = `<i class="fa-solid fa-gift mr-2"></i> ${t('drawNow')}`;
             }
         }
 
@@ -926,7 +1194,7 @@
             if (winners.length === 0) {
                 winnersList.innerHTML = `
                     <tr>
-                        <td colspan="4" class="text-center py-8 text-gray-500">暂无中奖记录</td>
+                        <td colspan="4" class="text-center py-8 text-gray-500">${t('winnersEmpty')}</td>
                     </tr>
                 `;
             } else {
@@ -942,14 +1210,14 @@
                             <div class="text-sm text-gray-400">${winner.time}</div>
                         </td>
                         <td class="py-3">
-                            <div class="text-gold-light font-medium">${winner.prizeName}</div>
+                            <div class="text-gold-light font-medium">${getPrizeName(prizes.find(p => p.id === winner.prizeId))}</div>
                         </td>
                         <td class="py-3 text-sm text-gray-400">${winner.time}</td>
                     </tr>
                 `).join('');
             }
 
-            document.getElementById('total-winners').textContent = `共${winners.length} 人`;
+            document.getElementById('total-winners').textContent = t('totalWinners', { count: winners.length });
         }
         function updatePrizeStock(prizeId) {
             const prize = prizes.find(p => p.id === prizeId);
@@ -972,10 +1240,11 @@
             const lastWinner = winners[winners.length - 1];
 
             if (lastWinner) {
-                marqueeText.textContent = `恭喜 ${lastWinner.name} 获得 ${lastWinner.prizeName}！`;
+                const prize = prizes.find(p => p.id === lastWinner.prizeId);
+                marqueeText.textContent = t('marqueeWinner', { name: lastWinner.name, prize: getPrizeName(prize) });
                 document.getElementById('marquee-container').classList.add('marquee');
             } else {
-                marqueeText.textContent = "欢迎参与大利万维年终抽奖盛典！";
+                marqueeText.textContent = t('marqueeWelcome');
                 document.getElementById('marquee-container').classList.remove('marquee');
             }
         }
@@ -1061,13 +1330,13 @@
 
                 const availableParticipants = participants.filter(p => !p.hasWon);
                 if (availableParticipants.length === 0) {
-                    alert('所有参与者都已中奖！');
+                    alert(t('alertAllWon'));
                     return;
                 }
 
                 const availablePrizes = prizes.filter(p => p.claimed < p.stock);
                 if (availablePrizes.length === 0) {
-                    alert('所有奖品已抽完！');
+                    alert(t('alertAllPrizes'));
                     return;
                 }
 
@@ -1107,7 +1376,7 @@
                         if (finalPrize.claimed < finalPrize.stock) {
                             finalPrize.claimed++;
                         } else {
-                            alert('该奖品已抽完！');
+                            alert(t('alertPrizeSoldOut'));
                             isDrawing = false;
                             drawBtn.disabled = false;
                             drawBtn.classList.remove('opacity-50');
@@ -1123,8 +1392,8 @@
                             id: winners.length + 1,
                             name: selectedParticipant.name,
                             prizeId: finalPrize.id,
-                            prizeName: finalPrize.name,
-                            time: new Date().toLocaleString('zh-CN')
+                            prizeName: getPrizeName(finalPrize),
+                            time: new Date().toLocaleString(getLocale())
                         };
 
                         winners.unshift(winnerRecord);
@@ -1151,7 +1420,7 @@
                             winnerOverlayAvatar.src = getAvatarUrl(selectedParticipant);
                             winnerOverlayName.textContent = selectedParticipant.name;
                             if (winnerOverlayPrize) {
-                                winnerOverlayPrize.textContent = finalPrize.name;
+                                winnerOverlayPrize.textContent = getPrizeName(finalPrize);
                             }
                             winnerOverlay.classList.add('is-visible');
                             setTimeout(() => {
@@ -1175,13 +1444,22 @@
         }
         document.addEventListener('DOMContentLoaded', () => {
             startCountdown();
-            renderParticipants();
             renderAvatarPool();
-            renderWinners();
             initDrawFunction();
 
             prizes.forEach(prize => updatePrizeStock(prize.id));
             setInterval(updateMarquee, 10000);
+
+            const langToggle = document.getElementById('lang-toggle');
+            if (langToggle) {
+                langToggle.addEventListener('click', () => {
+                    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+                    localStorage.setItem('lang', currentLang);
+                    applyLanguage();
+                });
+            }
+
+            applyLanguage();
         });
     </script>
 
